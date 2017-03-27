@@ -43,4 +43,19 @@ public class BOBroadcast_Android : BOBroadcast {
 	public override void BroadcastResume()
 	{
 	}
+
+	public override string BroadcastURL ()
+	{
+		return null;
+	}
+
+	public override bool SelectService ()
+	{
+		return false;
+	}
+
+	public override string ServiceBundleID ()
+	{
+		return null;
+	}
 }

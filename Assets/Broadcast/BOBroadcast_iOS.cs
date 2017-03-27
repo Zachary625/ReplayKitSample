@@ -11,6 +11,12 @@ public class BOBroadcast_iOS : BOBroadcast {
 	[DllImport("__Internal")]
 	private static extern bool BOBroadcastStreaming();
 	[DllImport("__Internal")]
+	private static extern bool BOBroadcastSelectService();
+	[DllImport("__Internal")]
+	private static extern string BOBroadcastURL();
+	[DllImport("__Internal")]
+	private static extern string BOBroadcastServiceBundleID();
+	[DllImport("__Internal")]
 	private static extern bool BOBroadcastStart();
 	[DllImport("__Internal")]
 	private static extern bool BOBroadcastPause();
@@ -95,6 +101,27 @@ public class BOBroadcast_iOS : BOBroadcast {
 	{
 		#if UNITY_IOS
 		BOBroadcastFinish();
+		#endif
+	}
+
+	public override bool SelectService ()
+	{
+		#if UNITY_IOS
+		return BOBroadcastSelectService();
+		#endif
+	}
+
+	public override string BroadcastURL ()
+	{
+		#if UNITY_IOS
+		return BOBroadcastURL();
+		#endif
+	}
+
+	public override string ServiceBundleID ()
+	{
+		#if UNITY_IOS
+		return BOBroadcastServiceBundleID();
 		#endif
 	}
 }

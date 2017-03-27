@@ -66,5 +66,8 @@ public abstract class BOBroadcast
 	public abstract void BroadcastPause();
 	public abstract void BroadcastResume();
 	public abstract void BroadcastFinish();
+	public abstract string BroadcastURL();
+	public abstract string ServiceBundleID ();
+	public abstract bool SelectService();
 
 }

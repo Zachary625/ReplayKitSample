@@ -65,4 +65,19 @@ public class BOBroadcastHelper : BOBroadcast {
 		broadcasting = false;
 		broadcastStreaming = false;
 	}
+
+	public override string BroadcastURL ()
+	{
+		return null;
+	}
+
+	public override bool SelectService ()
+	{
+		return false;
+	}
+
+	public override string ServiceBundleID ()
+	{
+		return null;
+	}
 }
