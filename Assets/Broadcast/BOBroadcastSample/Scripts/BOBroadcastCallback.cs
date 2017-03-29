@@ -13,6 +13,11 @@ public class BOBroadcastCallback : MonoBehaviour {
 	
 	}
 
+	public void BOBroadcast_OnServicesLoaded()
+	{
+		Debug.Log (" @ BOBroadcastCallback.BOBroadcast_OnServicesLoaded(): " + BOBroadcast.Instance.GetError());
+	}
+
 	public void BOBroadcast_OnServiceSelected()
 	{
 		Debug.Log (" @ BOBroadcastCallback.BOBroadcast_OnServiceSelected(): " + BOBroadcast.Instance.GetError());

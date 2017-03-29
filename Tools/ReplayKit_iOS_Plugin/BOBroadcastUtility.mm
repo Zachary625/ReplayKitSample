@@ -63,6 +63,9 @@ static NSError * s_BOBroadcastError;
     
     NSData *data = [NSJSONSerialization dataWithJSONObject:errorJsonData options:NSJSONWritingPrettyPrinted error:nil];
     NSString *strJson = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    NSLog(@" @ BOBroadcastUtility.NSErrorToJson(): %@", strJson);
+    
     return [BOBroadcastUtility NSStringToChars:strJson];
 }
 
