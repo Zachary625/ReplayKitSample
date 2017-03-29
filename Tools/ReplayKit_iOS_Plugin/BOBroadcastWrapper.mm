@@ -118,6 +118,7 @@ static BOBroadcastWrapper* s_BOBroadcastWrapper = nil;
 
     [[_m_broadcastObserver m_broadcastController] startBroadcastWithHandler:^(NSError * _Nullable error) {
         [BOBroadcastUtility SetError: error];
+        UnitySendMessage("GameClient", "BOBroadcast_OnStarted", "");
     }];
     
     return true;
@@ -137,6 +138,7 @@ static BOBroadcastWrapper* s_BOBroadcastWrapper = nil;
     
     [[_m_broadcastObserver m_broadcastController] finishBroadcastWithHandler:^(NSError * _Nullable error) {
         [BOBroadcastUtility SetError: error];
+        UnitySendMessage("GameClient", "BOBroadcast_OnFinished", "");
     }];
     return true;
 }

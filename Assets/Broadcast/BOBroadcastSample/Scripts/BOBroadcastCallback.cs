@@ -27,4 +27,14 @@ public class BOBroadcastCallback : MonoBehaviour {
 	{
 		Debug.Log (" @ BOBroadcastCallback.BOBroadcast_OnBroadcastFinished(): " + BOBroadcast.Instance.GetError());
 	}
+
+	public void BOBroadcast_OnStarted()
+	{
+		Debug.Log (" @ BOBroadcastCallback.BOBroadcast_OnStarted(): " + BOBroadcast.Instance.GetError());
+	}
+
+	public void BOBroadcast_OnFinished()
+	{
+		Debug.Log (" @ BOBroadcastCallback.BOBroadcast_OnFinished(): " + BOBroadcast.Instance.GetError());
+	}
 }
