@@ -58,4 +58,14 @@ public class BOBroadcast_Android : BOBroadcast {
 	{
 		return null;
 	}
+
+	public override void ClearError()
+	{
+		
+	}
+
+	public override string GetError()
+	{
+		return null;
+	}
 }

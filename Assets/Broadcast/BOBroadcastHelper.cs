@@ -80,4 +80,14 @@ public class BOBroadcastHelper : BOBroadcast {
 	{
 		return null;
 	}
+
+	public override void ClearError()
+	{
+
+	}
+
+	public override string GetError()
+	{
+		return null;
+	}
 }

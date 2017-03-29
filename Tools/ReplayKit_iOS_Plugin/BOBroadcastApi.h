@@ -14,6 +14,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+    void BOBroadcastClearError();
+    const char *BOBroadcastGetError();
     bool BOBroadcastAvailable();
     bool BOBroadcasting();
     bool BOBroadcastStreaming();
@@ -24,6 +26,10 @@ extern "C" {
     bool BOBroadcastFinish();
     bool BOBroadcastPause();
     bool BOBroadcastResume();
+    void BOBroadcastSetUseCam(bool useCam);
+    bool BOBroadcastGetUseCam();
+    void BOBroadcastSetUseMic(bool useMic);
+    bool BOBroadcastGetUseMic();
 #ifdef __cplusplus
 }
 #endif

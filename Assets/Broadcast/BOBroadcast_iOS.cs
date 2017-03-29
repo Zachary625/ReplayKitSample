@@ -5,6 +5,10 @@ using System.Runtime.InteropServices;
 public class BOBroadcast_iOS : BOBroadcast {
 	#if UNITY_IOS
 	[DllImport("__Internal")]
+	private static extern void BOBroadcastClearError();
+	[DllImport("__Internal")]
+	private static extern string BOBroadcastGetError();
+	[DllImport("__Internal")]
 	private static extern bool BOBroadcastAvailable();
 	[DllImport("__Internal")]
 	private static extern bool BOBroadcasting();
@@ -124,4 +128,21 @@ public class BOBroadcast_iOS : BOBroadcast {
 		return BOBroadcastServiceBundleID();
 		#endif
 	}
+
+	public override void ClearError()
+	{
+		#if UNITY_IOS
+		BOBroadcastClearError();
+		#endif
+	}
+
+	public override string GetError()
+	{
+		#if UNITY_IOS
+		return BOBroadcastGetError();
+		#elif
+		return null;
+		#endif
+	}
+
 }

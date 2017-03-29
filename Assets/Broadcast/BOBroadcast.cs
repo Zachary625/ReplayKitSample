@@ -62,6 +62,8 @@ public abstract class BOBroadcast
 		set;
 	}
 
+	public abstract void ClearError();
+	public abstract string GetError();
 	public abstract void BroadcastStart();
 	public abstract void BroadcastPause();
 	public abstract void BroadcastResume();

@@ -24,7 +24,7 @@
 -(bool)Broadcasting;
 -(bool)BroadcastStreaming;
 -(NSString *)BroadcastURL;
--(NSString *)BroadcastServiceBundleID;
+-(NSString *)ServiceBundleID;
 -(bool)BroadcastStart;
 -(bool)BroadcastPause;
 -(bool)BroadcastResume;

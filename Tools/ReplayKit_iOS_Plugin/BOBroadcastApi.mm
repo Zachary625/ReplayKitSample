@@ -1,5 +1,5 @@
 //
-//  BOBroadcastApi.m
+//  BOBroadcastApi.mm
 //  Unity-iPhone
 //
 //  Created by zhang.chi on 17/3/27.
@@ -8,6 +8,17 @@
 
 #import "BOBroadcastApi.h"
 #import "BOBroadcastWrapper.h"
+#import "BOBroadcastUtility.h"
+
+void BOBroadcastClearError()
+{
+    [BOBroadcastUtility SetError:nil];
+}
+
+const char *BOBroadcastGetError()
+{
+    return [BOBroadcastUtility NSErrorToJson:[BOBroadcastUtility GetError]];
+}
 
 bool BOBroadcastAvailable()
 {
@@ -26,12 +37,12 @@ bool BOBroadcastStreaming()
 
 const char *BOBroadcastURL()
 {
-    return [[[BOBroadcastWrapper Instance] BroadcastURL] UTF8String];
+    return [BOBroadcastUtility NSStringToChars:[[BOBroadcastWrapper Instance] BroadcastURL]];
 }
 
 const char *BOBroadcastServiceBundleID()
 {
-    return [[[BOBroadcastWrapper Instance] BroadcastServiceBundleID] UTF8String];
+    return [BOBroadcastUtility NSStringToChars:[[BOBroadcastWrapper Instance] ServiceBundleID]];
 }
 
 bool BOBroadcastSelectService()
@@ -58,3 +69,25 @@ bool BOBroadcastResume()
 {
     return [[BOBroadcastWrapper Instance] BroadcastResume];
 }
+
+void BOBroadcastSetUseCam(bool useCam)
+{
+    [[BOBroadcastWrapper Instance] SetUseCam:useCam];
+}
+
+bool BOBroadcastGetUseCam()
+{
+    return [[BOBroadcastWrapper Instance] GetUseCam];
+}
+
+void BOBroadcastSetUseMic(bool useMic)
+{
+    [[BOBroadcastWrapper Instance] SetUseMic:useMic];
+}
+
+bool BOBroadcastGetUseMic()
+{
+    return [[BOBroadcastWrapper Instance] GetUseMic];
+}
+
+

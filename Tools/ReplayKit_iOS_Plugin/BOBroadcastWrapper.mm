@@ -40,12 +40,28 @@ static BOBroadcastWrapper* s_BOBroadcastWrapper = nil;
 
 -(bool)Broadcasting
 {
-    return false;
+    if(nil == _m_broadcastObserver)
+    {
+        return false;
+    }
+    if(nil == [_m_broadcastObserver m_broadcastController])
+    {
+        return false;
+    }
+    return [[_m_broadcastObserver m_broadcastController] isBroadcasting];
 }
 
 -(bool)BroadcastStreaming
 {
-    return false;
+    if(nil == _m_broadcastObserver)
+    {
+        return false;
+    }
+    if(nil == [_m_broadcastObserver m_broadcastController])
+    {
+        return false;
+    }
+    return ![[_m_broadcastObserver m_broadcastController] isPaused];
 }
 
 -(NSString *)BroadcastURL
@@ -60,7 +76,7 @@ static BOBroadcastWrapper* s_BOBroadcastWrapper = nil;
     return nil;
 }
 
--(NSString *)BroadcastServiceBundleID
+-(NSString *)ServiceBundleID
 {
     if(nil != _m_broadcastObserver)
     {
@@ -84,18 +100,38 @@ static BOBroadcastWrapper* s_BOBroadcastWrapper = nil;
         [UnityGetGLViewController() presentViewController:broadcastActivityViewController animated:YES completion:^{
         }];
     }];
+    return true;
 }
 
 -(bool)BroadcastStart
 {
+    if(nil == _m_broadcastObserver)
+    {
+        return false;
+    }
+    if(nil == [_m_broadcastObserver m_broadcastController])
+    {
+        return false;
+    }
+
     [[_m_broadcastObserver m_broadcastController] startBroadcastWithHandler:^(NSError * _Nullable error) {
     }];
     
     return true;
 }
 
--(bool)BroadcastPause
+-(bool)BroadcastFinish
 {
+    
+    if(nil == _m_broadcastObserver)
+    {
+        return false;
+    }
+    if(nil == [_m_broadcastObserver m_broadcastController])
+    {
+        return false;
+    }
+    
     [[_m_broadcastObserver m_broadcastController] finishBroadcastWithHandler:^(NSError * _Nullable error) {
     }];
     return true;
@@ -103,12 +139,32 @@ static BOBroadcastWrapper* s_BOBroadcastWrapper = nil;
 
 -(bool)BroadcastResume
 {
+
+    if(nil == _m_broadcastObserver)
+    {
+        return false;
+    }
+    if(nil == [_m_broadcastObserver m_broadcastController])
+    {
+        return false;
+    }
+    
     [[_m_broadcastObserver m_broadcastController] resumeBroadcast];
     return true;
 }
 
--(bool)BroadcastFinish
+-(bool)BroadcastPause
 {
+
+    if(nil == _m_broadcastObserver)
+    {
+        return false;
+    }
+    if(nil == [_m_broadcastObserver m_broadcastController])
+    {
+        return false;
+    }
+
     [[_m_broadcastObserver m_broadcastController] pauseBroadcast];
     return true;
 }
