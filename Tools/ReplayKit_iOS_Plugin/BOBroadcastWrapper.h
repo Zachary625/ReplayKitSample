@@ -17,6 +17,7 @@
 + (BOBroadcastWrapper*)Instance;
 
 @property (strong, nonatomic) RPBroadcastObserver *m_broadcastObserver;
+@property (atomic) CGRect m_CamViewRect;
 
 -(bool)SelectService;
 
@@ -33,7 +34,8 @@
 -(bool)SetUseCam:(bool)useCam;
 -(bool)GetUseMic;
 -(bool)SetUseMic:(bool)useMic;
-
+-(bool)SetCamViewRect:(CGRect)rect;
+-(CGRect)GetCamViewRect;
 @end
 
 #endif /* BOBroadcastWrapper_h */

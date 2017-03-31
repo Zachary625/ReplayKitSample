@@ -30,6 +30,8 @@ extern "C" {
     bool BOBroadcastGetUseCam();
     void BOBroadcastSetUseMic(bool useMic);
     bool BOBroadcastGetUseMic();
+    bool BOBroadcastSetCamViewRect(float x, float y, float width, float height);
+    const char *BOBroadcastGetCamViewRect();
 #ifdef __cplusplus
 }
 #endif

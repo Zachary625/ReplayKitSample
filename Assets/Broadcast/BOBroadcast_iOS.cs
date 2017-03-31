@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Runtime.InteropServices;
+using SimpleJSON;
 
 public class BOBroadcast_iOS : BOBroadcast {
 	#if UNITY_IOS
@@ -36,6 +37,10 @@ public class BOBroadcast_iOS : BOBroadcast {
 	private static extern bool BOBroadcastGetUseMic();
 	[DllImport("__Internal")]
 	private static extern void BOBroadcastSetUseMic(bool useMic);
+	[DllImport("__Internal")]
+	private static extern void BOBroadcastSetCamViewRect(float x, float y, float width, float height);
+	[DllImport("__Internal")]
+	private static extern string BOBroadcastGetCamViewRect();
 	#endif
 
 	public override bool BroadcastAvailable {
@@ -71,12 +76,68 @@ public class BOBroadcast_iOS : BOBroadcast {
 		}
 	}
 
-	public override BroadcastOption Option {
-		get {
-			throw new System.NotImplementedException ();
+	public override bool UseCam {
+		get { 
+			#if UNITY_IOS
+			return BOBroadcastGetUseCam();
+			#else
+			return false;
+			#endif
 		}
-		set {
-			throw new System.NotImplementedException ();
+		set { 
+			#if UNITY_IOS
+			BOBroadcastSetUseCam(value);
+			#endif
+		}
+	}
+
+	public override bool UseMic {
+		get { 
+			#if UNITY_IOS
+			return BOBroadcastGetUseMic();
+			#else
+			return false;
+			#endif
+		}
+		set { 
+			#if UNITY_IOS
+			BOBroadcastSetUseMic(value);
+			#endif
+		}
+	}
+
+	public override Rect? CamViewRect {
+		get { 
+			#if UNITY_IOS
+			string rectJson = BOBroadcastGetCamViewRect();
+			if(string.IsNullOrEmpty(rectJson))
+			{
+				return null;
+			}
+
+			JSONNode root = JSON.Parse(rectJson);
+			try {
+				return new Rect() {
+					x = float.Parse(root["x"]),
+					y = float.Parse(root["y"]),
+					width = float.Parse(root["width"]),
+					height = float.Parse(root["height"]),
+				};
+			}
+			catch(System.Exception e)
+			{
+				return null;
+			}
+
+			#else
+			return null;
+			#endif
+		}
+		set { 
+			if (!value.HasValue) {
+				return;
+			}
+			BOBroadcastSetCamViewRect (value.Value.x, value.Value.y, value.Value.width, value.Value.height);
 		}
 	}
 
@@ -112,6 +173,8 @@ public class BOBroadcast_iOS : BOBroadcast {
 	{
 		#if UNITY_IOS
 		return BOBroadcastSelectService();
+		#else
+		return false;
 		#endif
 	}
 
@@ -119,6 +182,8 @@ public class BOBroadcast_iOS : BOBroadcast {
 	{
 		#if UNITY_IOS
 		return BOBroadcastURL();
+		#else
+		return null;
 		#endif
 	}
 
@@ -126,6 +191,8 @@ public class BOBroadcast_iOS : BOBroadcast {
 	{
 		#if UNITY_IOS
 		return BOBroadcastServiceBundleID();
+		#else
+		return null;
 		#endif
 	}
 
@@ -140,7 +207,7 @@ public class BOBroadcast_iOS : BOBroadcast {
 	{
 		#if UNITY_IOS
 		return BOBroadcastGetError();
-		#elif
+		#else
 		return null;
 		#endif
 	}

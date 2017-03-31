@@ -27,14 +27,30 @@ public class BOBroadcastHelper : BOBroadcast {
 		}
 	}
 
-	private BroadcastOption _Option = new BroadcastOption();
-
-	public override BroadcastOption Option {
+	public override bool UseCam {
 		get {
-			return _Option;
+			return false;
+		}
+		set { 
+			
+		}
+	}
+
+	public override bool UseMic {
+		get {
+			return false;
 		}
 		set {
-			_Option = value;
+			
+		}
+	}
+
+	public override Rect? CamViewRect {
+		get {
+			return null;
+		}
+		set {
+			
 		}
 	}
 

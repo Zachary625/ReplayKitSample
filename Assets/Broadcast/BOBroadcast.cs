@@ -3,11 +3,6 @@ using System.Collections;
 
 public abstract class BOBroadcast
 {
-	public class BroadcastOption
-	{
-		public bool UseCam = false;
-		public bool UseMic = false;
-	}
 
 	private static BOBroadcast m_Broadcast = null;
 
@@ -57,7 +52,17 @@ public abstract class BOBroadcast
 		get;
 	}
 
-	public abstract BroadcastOption Option {
+	public abstract bool UseCam {
+		get;
+		set;
+	}
+
+	public abstract bool UseMic {
+		get;
+		set;
+	}
+
+	public abstract Rect? CamViewRect {
 		get;
 		set;
 	}

@@ -90,4 +90,13 @@ bool BOBroadcastGetUseMic()
     return [[BOBroadcastWrapper Instance] GetUseMic];
 }
 
+bool BOBroadcastSetCamViewRect(float x, float y, float width, float height)
+{
+    return [[BOBroadcastWrapper Instance] SetCamViewRect:CGRectMake(x, y, width, height)];
+}
+
+const char *BOBroadcastGetCamViewRect()
+{
+    return [BOBroadcastUtility CGRectToJson:[[BOBroadcastWrapper Instance] GetCamViewRect]];
+}
 

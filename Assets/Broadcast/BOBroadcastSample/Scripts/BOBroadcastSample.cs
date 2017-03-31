@@ -7,6 +7,8 @@ public class BOBroadcastSample : MonoBehaviour {
 
 	public Text TimerText;
 	public Text StatusText;
+	public Text InfoText;
+	public Image CamViewPanel;
 
 	// Use this for initialization
 	void Start () {
@@ -24,20 +26,29 @@ public class BOBroadcastSample : MonoBehaviour {
 	{
 		if (StatusText) {
 			string statusString = string.Format (
-				"Broadcast:{0}\n" +
-				"Available: {1}\n" +
-				"Broadcasting: {2}\n" +
-				"Streaming: {3}\n" +
-				"URL: {4}\n" +
-				"Bundle ID: {5}\n",
-				BOBroadcast.Instance.GetType().Name,
+				"Available: {0}\n" +
+				"Broadcasting: {1}\n" +
+				"Streaming: {2}\n" +
+				"Cam: {3}\n" +
+				"Mic: {4}\n",
 				BOBroadcast.Available, 
 				BOBroadcast.Instance.Broadcasting,
 				BOBroadcast.Instance.BroadcastStreaming,
-				BOBroadcast.Instance.BroadcastURL(),
-				BOBroadcast.Instance.ServiceBundleID()
+				BOBroadcast.Instance.UseCam,
+				BOBroadcast.Instance.UseMic
 			);
 			StatusText.text = statusString;
+
+			string infoString = string.Format (
+				"URL: {0}\n" +
+				"Bundle ID: {1}\n" +
+				"CamPreviewRect: {2}",
+				BOBroadcast.Instance.BroadcastURL(),
+				BOBroadcast.Instance.ServiceBundleID(),
+				BOBroadcast.Instance.CamViewRect.HasValue? BOBroadcast.Instance.CamViewRect.Value.ToString(): "null"
+			);
+			InfoText.text = infoString;
+
 		}
 	}
 
@@ -101,5 +112,44 @@ public class BOBroadcastSample : MonoBehaviour {
 		Debug.Log (" @ BOBroadcastSample.OnPauseResumeButtonClicked(): " + BOBroadcast.Instance.GetError());
 	}
 
+	public void OnCamButtonClicked()
+	{
+		if (BOBroadcast.Instance.Broadcasting) {
+			Debug.Log (" @ BOBroadcastSample.OnCamButtonClicked(): Broadcasting == true!!!");
+			return;
+		}
+
+		BOBroadcast.Instance.UseCam = !BOBroadcast.Instance.UseCam;
+		if (BOBroadcast.Instance.UseCam) {
+			if (CamViewPanel != null) {
+				Rect rect = new Rect (0, 0, 100, 200);
+				BOBroadcast.Instance.CamViewRect = rect;
+			}
+		}
+	}
+
+	public void OnMicButtonClicked()
+	{
+		if (BOBroadcast.Instance.Broadcasting) {
+			Debug.Log (" @ BOBroadcastSample.OnMicButtonClicked(): Broadcasting == true!!!");
+			return;
+		}
+
+		BOBroadcast.Instance.UseMic = !BOBroadcast.Instance.UseMic;
+	}
+
+	public void OnMusicButtonClicked()
+	{
+		AudioSource audioSource = this.GetComponent<AudioSource> ();
+		if (audioSource == null) {
+			return;
+		}
+
+		if (audioSource.isPlaying) {
+			audioSource.Pause ();
+		} else {
+			audioSource.Play ();
+		}
+	}
 
 }

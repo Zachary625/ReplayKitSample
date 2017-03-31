@@ -119,6 +119,34 @@ static BOBroadcastWrapper* s_BOBroadcastWrapper = nil;
     [[_m_broadcastObserver m_broadcastController] startBroadcastWithHandler:^(NSError * _Nullable error) {
         [BOBroadcastUtility SetError: error];
         UnitySendMessage("GameClient", "BOBroadcast_OnStarted", "");
+        if(nil != error)
+        {
+            return;
+        }
+        if(nil == [RPScreenRecorder sharedRecorder])
+        {
+            NSLog(@"[RPScreenRecorder sharedRecorder] == nil");
+            return;
+        }
+        if(false == [[RPScreenRecorder sharedRecorder] isCameraEnabled])
+        {
+            NSLog(@"[[RPScreenRecorder sharedRecorder] isCameraEnabled] == false");
+            return;
+        }
+        if(nil == [RPScreenRecorder sharedRecorder].cameraPreviewView)
+        {
+            NSLog(@"[RPScreenRecorder sharedRecorder].cameraPreviewView == nil");
+            return;
+        }
+        if(CGRectIsNull(_m_CamViewRect))
+        {
+            NSLog(@"CGRectIsNull(_m_CamViewRect)");
+            return;
+        }
+        [[RPScreenRecorder sharedRecorder].cameraPreviewView setFrame:_m_CamViewRect];
+        [RPScreenRecorder sharedRecorder]
+        
+        [UnityGetGLView() addSubview:[RPScreenRecorder sharedRecorder].cameraPreviewView];
     }];
     
     return true;
@@ -177,22 +205,51 @@ static BOBroadcastWrapper* s_BOBroadcastWrapper = nil;
 
 -(bool)GetUseCam
 {
-    return false;
+    if(nil == [RPScreenRecorder sharedRecorder])
+    {
+        return false;
+    }
+    return [[RPScreenRecorder sharedRecorder] isCameraEnabled];
 }
 
 -(bool)SetUseCam:(bool)useCam
 {
-    return false;
+    if(nil == [RPScreenRecorder sharedRecorder])
+    {
+        return false;
+    }
+    [[RPScreenRecorder sharedRecorder] setCameraEnabled:useCam];
+    return true;
 }
 
 -(bool)GetUseMic
 {
-    return false;
+    if(nil == [RPScreenRecorder sharedRecorder])
+    {
+        return false;
+    }
+    return [[RPScreenRecorder sharedRecorder] isMicrophoneEnabled];
 }
 
 -(bool)SetUseMic:(bool)useMic
 {
-    return false;
+    if(nil == [RPScreenRecorder sharedRecorder])
+    {
+        return false;
+    }
+    [[RPScreenRecorder sharedRecorder] setMicrophoneEnabled:useMic];
+    return true;
+}
+
+-(bool)SetCamViewRect:(CGRect)rect
+{
+    _m_CamViewRect = rect;
+    return true;
+}
+
+-(CGRect)GetCamViewRect
+{
+    return _m_CamViewRect;
 }
 
 

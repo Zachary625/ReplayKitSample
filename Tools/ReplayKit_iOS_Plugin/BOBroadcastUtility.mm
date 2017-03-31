@@ -69,5 +69,25 @@ static NSError * s_BOBroadcastError;
     return [BOBroadcastUtility NSStringToChars:strJson];
 }
 
++(const char *)CGRectToJson:(CGRect)rect
+{
+    if(CGRectIsNull(rect))
+    {
+        return nil;
+    }
+    NSDictionary *rectJsonData = @
+    {
+        @"x": @(rect.origin.x),
+        @"y": @(rect.origin.y),
+        @"width": @(rect.size.width),
+        @"height": @(rect.size.height),
+    };
+
+    NSData *data = [NSJSONSerialization dataWithJSONObject:rectJsonData options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *strJson = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return [BOBroadcastUtility NSStringToChars:strJson];
+}
+
+
 @end
 

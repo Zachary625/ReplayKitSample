@@ -21,9 +21,31 @@ public class BOBroadcast_Android : BOBroadcast {
 		}
 	}
 
-	public override BroadcastOption Option {
-		get;
-		set;
+	public override bool UseCam {
+		get {
+			return false;
+		}
+		set { 
+
+		}
+	}
+
+	public override bool UseMic {
+		get {
+			return false;
+		}
+		set {
+
+		}
+	}
+
+	public override Rect? CamViewRect {
+		get {
+			return null;
+		}
+		set {
+
+		}
 	}
 
 	public override void BroadcastStart ()

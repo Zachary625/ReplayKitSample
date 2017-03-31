@@ -18,7 +18,7 @@
 +(void)SetError:(NSError *)error;
 +(NSError *)GetError;
 +(const char *)NSErrorToJson:(NSError *)error;
-
++(const char *)CGRectToJson:(CGRect)rect;
 @end
 
 #endif /* BOBroadcastUtility_h */
