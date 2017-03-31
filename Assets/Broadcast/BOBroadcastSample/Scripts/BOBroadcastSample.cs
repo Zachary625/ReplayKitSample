@@ -30,12 +30,14 @@ public class BOBroadcastSample : MonoBehaviour {
 				"Broadcasting: {1}\n" +
 				"Streaming: {2}\n" +
 				"Cam: {3}\n" +
-				"Mic: {4}\n",
+				"Mic: {4}\n" + 
+				"Music: {5}",
 				BOBroadcast.Available, 
 				BOBroadcast.Instance.Broadcasting,
 				BOBroadcast.Instance.BroadcastStreaming,
 				BOBroadcast.Instance.UseCam,
-				BOBroadcast.Instance.UseMic
+				BOBroadcast.Instance.UseMic,
+				this.GetComponent<AudioSource>().isPlaying
 			);
 			StatusText.text = statusString;
 

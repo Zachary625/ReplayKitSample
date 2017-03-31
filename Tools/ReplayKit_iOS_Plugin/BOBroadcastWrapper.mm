@@ -144,7 +144,6 @@ static BOBroadcastWrapper* s_BOBroadcastWrapper = nil;
             return;
         }
         [[RPScreenRecorder sharedRecorder].cameraPreviewView setFrame:_m_CamViewRect];
-        [RPScreenRecorder sharedRecorder]
         
         [UnityGetGLView() addSubview:[RPScreenRecorder sharedRecorder].cameraPreviewView];
     }];
