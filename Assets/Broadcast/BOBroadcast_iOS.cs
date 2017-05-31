@@ -137,7 +137,9 @@ public class BOBroadcast_iOS : BOBroadcast {
 			if (!value.HasValue) {
 				return;
 			}
+			#if UNITY_IOS
 			BOBroadcastSetCamViewRect (value.Value.x, value.Value.y, value.Value.width, value.Value.height);
+			#endif
 		}
 	}
 
